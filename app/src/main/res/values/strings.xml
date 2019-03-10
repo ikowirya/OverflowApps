@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">T\'Lab Overflow</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="creation_date">Creation Date</string>
+    <string name="display_name">Display Name</string>
+    <string name="nothing">Tidak ada hasil</string>
+    <string name="search">Search Tag</string>
+    <string name="range_date">Filter Date</string>
+
+</resources>

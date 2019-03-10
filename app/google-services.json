@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "650872645783",
+    "firebase_url": "https://tlaboverflow.firebaseio.com",
+    "project_id": "tlaboverflow",
+    "storage_bucket": "tlaboverflow.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650872645783:android:13f585ae564e50bf",
+        "android_client_info": {
+          "package_name": "com.tlab.stackexchange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650872645783-3ekhena0rrnpgqip99a7fjaq2pemlht5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tlab.stackexchange",
+            "certificate_hash": "8e445fde5eda2ad4186b74d4043c222d7cda62b4"
+          }
+        },
+        {
+          "client_id": "650872645783-n1in22sggimnumj61attest63f5duo7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5UQM90ESJLQWy0SrsTa0rFTkRRO8Q6cI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650872645783-n1in22sggimnumj61attest63f5duo7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

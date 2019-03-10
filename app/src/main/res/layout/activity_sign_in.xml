@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash"
+    tools:context=".SignInActivity">
+
+
+    <ImageView
+        android:layout_marginTop="80dp"
+        android:tint="@color/white"
+        android:src="@drawable/merk"
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />
+
+    <Button
+        android:id="@+id/btnLoginGoogle"
+        android:layout_marginLeft="75dp"
+        android:layout_marginRight="75dp"
+        android:paddingLeft="5dp"
+        android:text="@string/login_with_google"
+        android:textAllCaps="false"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="1dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="130dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_white_round"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Powered by"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/logo"
+            android:background="@drawable/bg_white_round"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_green"
+    tools:context="stackexchange.tlab.com.tlaboverflow.RangeDateActivity">
+    <include layout="@layout/toolbar"/>
+    <LinearLayout
+        android:layout_margin="15dp"
+        android:paddingTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/btnStartDate"
+            android:layout_weight="1"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:padding="10dp"
+                android:background="@drawable/bg_green_round"
+                android:text="Start Date"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txtStartDate"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:background="@drawable/bg_white_round"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="10/03/2019"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btnEndDate"
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:padding="10dp"
+                android:background="@drawable/bg_green_round"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="End Date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txtEndDate"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:background="@drawable/bg_white_round"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="10/03/2019"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btnFilter"
+            android:background="@drawable/bg_green_round"
+            android:text="FILTER"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
