@@ -112,8 +112,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref",0);
         min = preferences.getString("timestampStart",null);
         max = preferences.getString("timestampEnd",null);
-        Call<Schema> users = apiInterface.getSearch(pagesize,"desc","",
-                "","activity",tagged,"stackoverflow");
+        Call<Schema> users = apiInterface.getSearch(pagesize,"desc",min,
+                max,"activity",tagged,"stackoverflow");
         users.enqueue(new Callback<Schema>() {
             @Override
             public void onResponse(Call<Schema> call, retrofit2.Response<Schema> response) {

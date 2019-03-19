@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.security.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,16 +57,25 @@ public class RangeDateActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.range_date);
 
-        Locale id = new Locale("in", "ID");
-        final String pattern = "dd/MM/YYYY";
+//        Locale id = new Locale("in", "ID");
+//        final String pattern = "dd-MM-yyyy";
         Date today = new Date();
-
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern, id);
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//        SimpleDateFormat sdf = new SimpleDateFormat(pattern, id);
         before = sdf.format(today);
 
 //        Log.d("TGL"," pertama"+today.getTime());
-        timestampStart = today.getTime();
-        timestampEnd = today.getTime();
+        try {
+            Date mDate = sdf.parse(before);
+            Date mDate2 = sdf.parse(before);
+            long timeInMilliseconds = mDate.getTime();
+            long timeInMilliseconds2 = mDate2.getTime();
+            timestampStart=timeInMilliseconds/1000;
+            timestampEnd=timeInMilliseconds2/1000;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref",0);
         start = preferences.getString("start",before);
@@ -74,8 +84,23 @@ public class RangeDateActivity extends AppCompatActivity {
         txtEndDate.setText(end);
 
 
-        myCalendar = Calendar.getInstance();
-        date = new DatePickerDialog.OnDateSetListener() {
+//        myCalendar = Calendar.getInstance();
+//        date = new DatePickerDialog.OnDateSetListener() {
+//
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int monthOfYear,
+//                                  int dayOfMonth) {
+//                // TODO Auto-generated method stub
+//                myCalendar.set(Calendar.YEAR, year);
+//                myCalendar.set(Calendar.MONTH, monthOfYear);
+//                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+////                updateLabel(TYPE);
+//            }
+//        };
+
+        final Calendar myCalendar = Calendar.getInstance();
+        final Calendar myCalendar2 = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -84,10 +109,47 @@ public class RangeDateActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel(TYPE);
+                String myFormat = "dd-MM-yyyy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                timestampStart = myCalendar.getTimeInMillis() / 1000;
+                Log.d("imesti", "updateLabel: "+timestampStart);
+                txtStartDate.setText(sdf.format(myCalendar.getTime()));
+                start = sdf.format(myCalendar.getTime());
+                SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref",0);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("timestampStart",String.valueOf(timestampStart));
+                editor.putString("timestampEnd",String.valueOf(timestampEnd));
+                editor.putString("start",start);
+                editor.putString("end",end);
+                editor.commit();
             }
-        };
 
+        };
+        final DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar2.set(Calendar.YEAR, year);
+                myCalendar2.set(Calendar.MONTH, monthOfYear);
+                myCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "dd-MM-yyyy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                timestampEnd = myCalendar2.getTimeInMillis() / 1000;
+                Log.d("imestii", "updateLabel: "+timestampEnd);
+                txtEndDate.setText(sdf.format(myCalendar2.getTime()));
+                end = sdf.format(myCalendar2.getTime());
+                SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref",0);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("timestampStart",String.valueOf(timestampStart));
+                editor.putString("timestampEnd",String.valueOf(timestampEnd));
+                editor.putString("start",start);
+                editor.putString("end",end);
+                editor.commit();
+            }
+
+        };
         btnStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +158,7 @@ public class RangeDateActivity extends AppCompatActivity {
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
                 myCalendar.add(Calendar.MONTH, -6);
+
                 dialog.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
                 dialog.show();
             }
@@ -105,11 +168,12 @@ public class RangeDateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TYPE = 1;
-                dialog = new DatePickerDialog(RangeDateActivity.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-                myCalendar.add(Calendar.MONTH, -6);
-                dialog.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
+                dialog = new DatePickerDialog(RangeDateActivity.this, date2, myCalendar2
+                        .get(Calendar.YEAR), myCalendar2.get(Calendar.MONTH),
+                        myCalendar2.get(Calendar.DAY_OF_MONTH));
+                myCalendar2.add(Calendar.MONTH, -6);
+
+                dialog.getDatePicker().setMinDate(myCalendar2.getTimeInMillis());
                 dialog.show();
             }
         });
@@ -117,13 +181,7 @@ public class RangeDateActivity extends AppCompatActivity {
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref",0);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("timestampStart",String.valueOf(timestampStart));
-                editor.putString("timestampEnd",String.valueOf(timestampEnd));
-                editor.putString("start",start);
-                editor.putString("end",end);
-                editor.commit();
+
                 finish();
 
             }
@@ -131,24 +189,49 @@ public class RangeDateActivity extends AppCompatActivity {
 
     }
 
+
+
     private void updateLabel(int type) {
-        Locale id = new Locale("in", "ID");
-        final String pattern = "dd/MM/YYYY";
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern, id);
-        after = sdf.format(myCalendar.getTime());
 
         if(type ==0) {
-            txtStartDate.setText(after);
+//            Locale id = new Locale("in", "ID");
+//            final String pattern = "dd-MM-yyyy";
+//            SimpleDateFormat sdf = new SimpleDateFormat(pattern, id);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             after = sdf.format(myCalendar.getTime());
-            start= after;
-            timestampStart = myCalendar.getTimeInMillis();
+            try {
+                Date mDate = sdf.parse(after);
+                long timeInMilliseconds = mDate.getTime();
+                timestampStart=timeInMilliseconds/1000;
+                txtStartDate.setText(after);
+                start= after;
+                Log.d("imestii", "updateLabel: "+timestampEnd);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+//            txtStartDate.setText(after);
+//            after = sdf.format(myCalendar.getTime());
+//            start= after;
+//            timestampStart = myCalendar.getTimeInMillis();
 
         }else if(type == 1) {
-            txtEndDate.setText(after);
-            after = sdf.format(myCalendar.getTime());
-            end =after;
 
-            timestampEnd = myCalendar.getTimeInMillis();
+//            Locale id = new Locale("in", "ID");
+//            final String pattern = "dd-MM-yyyy";
+//            SimpleDateFormat sdf2 = new SimpleDateFormat(pattern, id);
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+            after = sdf2.format(myCalendar.getTime());
+            try {
+                Date mDate2 = sdf2.parse(after);
+                long timeInMilliseconds = mDate2.getTime();
+                timestampEnd=timeInMilliseconds/1000;
+                Log.d("imesti", "updateLabel: "+timestampEnd);
+                txtEndDate.setText(after);
+                end =after;
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         }
 
 //        Toast.makeText(this, "" + after, Toast.LENGTH_SHORT).show();

@@ -10,8 +10,8 @@ public interface ApiInterface {
     @GET("search")
     Call<Schema> getSearch(@Query("pagesize") String pagesize,
                            @Query("order") String order,
-                           @Query("min") String min,
-                           @Query("max") String max,
+                           @Query("fromdate") String min,
+                           @Query("todate") String max,
                            @Query("sort") String sort,
                            @Query("tagged") String tagged,
                            @Query("site") String site);
